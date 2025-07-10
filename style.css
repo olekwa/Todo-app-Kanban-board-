@@ -82,7 +82,7 @@ h1::after{
 }
 
 .list.over{
-  background-color: #017a72;
+  background-color: #04b5dc;
 }
 
 @media(max-width: 768px) {
