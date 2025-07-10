@@ -1,5 +1,8 @@
   const cards = document.querySelectorAll('.card');
   const lists = document.querySelectorAll('.list');
+  const addTaskBtn = document.getElementById('add-task-btn');
+  const taskInput = document.getElementById('task-input');
+  const todoList = document.getElementById('list1');
 
     for( const card of cards) {
       card.addEventListener('dragstart', dragStart);
@@ -44,3 +47,36 @@
       this.appendChild(card);
       this.classList.remove('over');
     }
+
+
+  let cardIdCounter = 100; // To avoid ID clashes
+
+  addTaskBtn.addEventListener('click', () => {
+    const taskText = taskInput.value.trim();
+
+    if (taskText === "") {
+      alert("Please enter a task.");
+      return;
+    }
+
+    const newCard = document.createElement('div');
+    newCard.className = 'card';
+    newCard.draggable = true;
+    newCard.id = 'card' + cardIdCounter++;
+    newCard.textContent = taskText;
+
+    // Add drag events to the new card
+    newCard.addEventListener('dragstart', dragStart);
+    newCard.addEventListener('dragend', dragEnd);
+
+    todoList.appendChild(newCard);
+    taskInput.value = '';
+  });
+
+  taskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      addTaskBtn.click();
+    }
+  });
+
+
